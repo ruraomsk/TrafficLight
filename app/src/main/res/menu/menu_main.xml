@@ -1,0 +1,28 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="ru.list.ruraomsk.trafficlight.MainActivity">
+    <item
+        android:id="@+id/menu_choice"
+        android:title="Выбрать устройство"/>
+    <group android:id="@+id/devices"
+        android:enabled="true">
+        <item
+            android:id="@+id/menu_open"
+            android:title="Подключить устройство">
+        </item>
+        <item
+            android:id="@+id/menu_close"
+            android:title="Отключить устройство">
+        </item>
+    </group>
+    <item
+        android:id="@+id/menu_update"
+        android:title="Обновить список устройств">
+    </item>
+    <item
+        android:id="@+id/menu_option"
+        android:title="Настройки">
+    </item>
+
+</menu>
