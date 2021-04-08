@@ -27,17 +27,19 @@ public class Device extends Service {
         this.login=login;
         this.password=password;
 
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d("litrDebug", "OnStartCommand Device" );
+//        Log.d("litrDebug", "OnStartCommand Device" );
 
         return super.onStartCommand(intent, flags, startId);
     }
 
     public void connect(){
         if(slot!=null) return;
+        Log.d("litrDebug", this.host );
         try {
             slot=new Slot(host,port);
             slot.start();
@@ -47,20 +49,21 @@ public class Device extends Service {
                 slot=null;
                 return;
             }
-            slot.writeMessage("login="+login+" password="+password);
-            while (slot.isWork()&&!slot.isMessage()){
-                sleep(100);
-            }
-            String message=slot.getMessage();
-            if (message==null) return;
-            Log.d("litrDebug","Получил:"+message+":");
-            if (message.contains("OK")&&slot.isWork()) {
-                Log.d("litrDebug","Прошел верификацию");
-                work=true;
-            } else {
-                Log.d("litrDebug","Верификацию не прошел");
-                return;
-            }
+            work=true;
+//            slot.writeMessage("login="+login+" password="+password);
+//            while (slot.isWork()&&!slot.isMessage()){
+//                sleep(100);
+//            }
+//            String message=slot.getMessage();
+//            if (message==null) return;
+//            Log.d("litrDebug","Получил:"+message+":");
+//            if (message.contains("OK")&&slot.isWork()) {
+//                Log.d("litrDebug","Прошел верификацию");
+//                work=true;
+//            } else {
+//                Log.d("litrDebug","Верификацию не прошел");
+//                return;
+//            }
         } catch (InterruptedException e) {
             Log.d("litrDebug",e.getMessage());
         }
@@ -72,6 +75,7 @@ public class Device extends Service {
                 try {
                     sleep(1000);
                     //TODO
+
                 } catch (InterruptedException e) {
                     Log.d("litrDebug",e.getMessage());
                 }
@@ -79,15 +83,14 @@ public class Device extends Service {
             }
         });
         thread.start();
-        slot.writeMessage("#DBG.MODE:1");
     }
     public void disconnect(){
         if(slot==null) return;
-        slot.writeMessage("exit");
+//        slot.writeMessage("exit");
         try {
             sleep(1000);
             second.interrupt();
-            thread.interrupt();
+//            thread.interrupt();
             while(slot.isWork()){
                 sleep(500);
             }
@@ -113,12 +116,12 @@ public class Device extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.d("litrDebug", "OnCrete Device" );
+//        Log.d("litrDebug", "OnCrete Device" );
     }
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.d("litrDebug", "OnBind Device" );
+//        Log.d("litrDebug", "OnBind Device" );
         return binder;
     }
 

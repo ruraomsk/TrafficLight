@@ -34,6 +34,7 @@ public class Common {
     public static String DefaultIpLAN;
     public static String DefaultPortLAN;
     static SharedPreferences sPref;
+//    public static String repeatMessage="#VPU.PHATU:0B";
     static public void run(Context c){
         ctx=c;
         values=new ConcurrentHashMap<>();

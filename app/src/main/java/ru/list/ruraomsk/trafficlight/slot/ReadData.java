@@ -45,14 +45,22 @@ public class ReadData  extends Thread{
 //                    Log.d("litrDebug","Time "+list[0]+".TIME"+"  <"+time+">");
                 } else {
                     if(list.length ==1) last=" ";
-                    else last+=list[1];
+                    else {
+                        String[] l=list[1].split(",");
+                        if (l.length!=1) {
+                            //Есть второй параметр
+                            Common.values.put(list[0]+":2",l[1]);
+                            list[1]=l[0];
+                        }
+                        last+=list[1];
+                    }
                 }
                 if(last.length()==0) last=" ";
                 Common.values.put(list[0],last);
 //                Log.d("litrDebug","Ключ "+list[0]+"  <"+last+">");
             }
         } catch (InterruptedException e) {
-//            if(e!=null) Log.d("litrDebug",e.getMessage());
+            if(e!=null) Log.d("litrDebug",e.getMessage());
         }
         Log.d("litrDebug","Stop ReadData");
 

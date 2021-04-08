@@ -76,7 +76,7 @@ public class Slot extends Thread implements Runnable{
                                 continue;
                             }
                             String message=bufferIn.readLine();
-//                            Log.d("litrDebug","Read:"+message+":");
+                            Log.d("litrDebug","Read:"+message+":");
 
                             toRead.add(message);
                         }
@@ -88,16 +88,25 @@ public class Slot extends Thread implements Runnable{
                 }
             });
             reader.start();
+            String lastMessage="";
             while(work){
-                if(toWrite.isEmpty()){
+                int counter=0;
+                while(toWrite.isEmpty() || counter<5){
+                    counter++;
                     sleep(100);
-                    continue;
                 }
-                String mess=toWrite.poll();
+                if (!toWrite.isEmpty()){
+                    lastMessage=toWrite.poll();
 
-                sendMessage(mess);
-//                Log.d("litrDebug",mess);
-                if(mess.startsWith("exit")) {
+                } else {
+                    if (lastMessage.length()==0) {
+                        continue;
+                    }
+                }
+
+                sendMessage(lastMessage);
+                Log.d("litrDebug","Send:"+lastMessage);
+                if(lastMessage.startsWith("exit")) {
                     sleep(1000);
                     break;
                 }
@@ -115,6 +124,7 @@ public class Slot extends Thread implements Runnable{
         return work;
     }
     public void writeMessage(String message){
+
         toWrite.add(message);
     }
     public String getMessage(){

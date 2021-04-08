@@ -51,24 +51,26 @@ public class MainActivity extends AppCompatActivity {
                 if (fab.getText().toString().equals("Начать работу")){
                     table.setVisibility(View.VISIBLE);
                     fab.setText("Закончить работу");
+                    Common.device.slot.writeMessage("#VPU.PHATU:0B");
                 } else {
                     fab.setText("Начать работу");
                     table.setVisibility(View.INVISIBLE);
+                    Common.device.slot.writeMessage("#VPU.PHATU:00");
                 }
-
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
         Common.run(this);
         Common.intent=new Intent(this, Device.class);
         ComponentName name=startService(new Intent(this, Device.class));
-        if(name!=null) Log.d("litrDebug", name.getPackageName()+""+name.getClassName() );
+//        if(name!=null) Log.d("litrDebug", name.getPackageName()+""+name.getClassName() );
 
         Common.sconn=new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                Log.d("litrDebug", "onServerConnected" );
+//                Log.d("litrDebug", "onServerConnected" );
                 Common.device=((Device.DeviceBinder) service).getService();
                 Common.bound=true;
 
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         if(!bindService(Common.intent,Common.sconn,0)){
-            Log.d("litrDebug", "not binding" );
+//            Log.d("litrDebug", "not binding" );
 
         };
 

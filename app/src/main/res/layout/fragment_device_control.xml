@@ -59,18 +59,6 @@
             android:textAlignment="center"
             android:text="8"
             android:id="@+id/faza8l"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="ЖМ"
-            android:id="@+id/faza10l"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="OC"
-            android:id="@+id/faza11l"/>
     </TableRow>
     <TableRow>
         <Button
@@ -113,6 +101,22 @@
             android:layout_height="wrap_content"
             android:text="8"
             android:id="@+id/faza8"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="ЖМ"
+            android:id="@+id/faza10l"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="OC"
+            android:id="@+id/faza11l"/>
+    </TableRow>
+    <TableRow>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -124,7 +128,6 @@
             android:text="ОС"
             android:id="@+id/faza11"/>
     </TableRow>
-
 </TableLayout>
 
 
