@@ -16,14 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DeviceControl extends ViewController implements View.OnClickListener {
-    int fazet=0;
     List<TextView> views = new ArrayList<>();
     List<Button> buttons = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        fazet=0;
 //        Common.values.put("#VPU.PHATS:2","0F");
         View v= inflater.inflate(R.layout.fragment_device_control, container, false);
         buttons.add(v.findViewById(R.id.faza1));
@@ -52,7 +50,6 @@ public class DeviceControl extends ViewController implements View.OnClickListene
         return v;
     }
     void setViews (){
-//        fazet=0;
         int i=1;
         String s=Common.values.get("#VPU.PHATS:2");
         if (s==null){
@@ -86,6 +83,11 @@ public class DeviceControl extends ViewController implements View.OnClickListene
     @Override
     public void View()
     {
+        String s=Common.values.get("#VPU.PHATS:3");
+        if (s==null){
+            s="00";
+        }
+        int fazet=Integer.valueOf(s,16);
         if (Common.values==null) return;
         setViews();
         if (fazet>0){
@@ -97,7 +99,7 @@ public class DeviceControl extends ViewController implements View.OnClickListene
                 t.setBackgroundColor(Color.GREEN);
             }
         }
-        String s=Common.values.get("#VPU.PHATS");
+        s=Common.values.get("#VPU.PHATS");
 
         if (s==null){
             s="01";
@@ -121,7 +123,7 @@ public class DeviceControl extends ViewController implements View.OnClickListene
                 Button b=buttons.get(fazet-1);
                 b.setBackgroundColor(Color.GREEN);
             } else {
-                if (fazez>9){
+                if (fazez>9 && fazet<12){
                     Button b=buttons.get(fazet-2);
                     b.setBackgroundColor(Color.GREEN);
                 }
@@ -147,64 +149,54 @@ public class DeviceControl extends ViewController implements View.OnClickListene
         Button b;
         switch (v.getId()){
             case R.id.faza1:
-                fazet=1;
                 Common.device.slot.writeMessage("#VPU.PHATU:01");
                 b=buttons.get(0);
                 b.setBackgroundColor(Color.BLUE);
                 break;
             case R.id.faza2:
-                fazet=2;
                 Common.device.slot.writeMessage("#VPU.PHATU:02");
                 b=buttons.get(1);
                 b.setBackgroundColor(Color.BLUE);
                 break;
             case R.id.faza3:
-                fazet=3;
                 Common.device.slot.writeMessage("#VPU.PHATU:03");
                 b=buttons.get(2);
                 b.setBackgroundColor(Color.BLUE);
                 break;
             case R.id.faza4:
-                fazet=4;
                 b=buttons.get(3);
                 b.setBackgroundColor(Color.BLUE);
                 Common.device.slot.writeMessage("#VPU.PHATU:04");
                 break;
             case R.id.faza5:
-                fazet=5;
                 b=buttons.get(4);
                 b.setBackgroundColor(Color.BLUE);
                 Common.device.slot.writeMessage("#VPU.PHATU:05");
                 break;
             case R.id.faza6:
-                fazet=6;
                 Common.device.slot.writeMessage("#VPU.PHATU:06");
                 b=buttons.get(5);
                 b.setBackgroundColor(Color.BLUE);
                 break;
             case R.id.faza7:
-                fazet=7;
                 Common.device.slot.writeMessage("#VPU.PHATU:07");
                 b=buttons.get(6);
                 b.setBackgroundColor(Color.BLUE);
                 break;
             case R.id.faza8:
-                fazet=8;
                 b=buttons.get(7);
                 b.setBackgroundColor(Color.BLUE);
                 Common.device.slot.writeMessage("#VPU.PHATU:08");
                 break;
             case R.id.faza10:
-                fazet=10;
                 b=buttons.get(8);
                 b.setBackgroundColor(Color.BLUE);
-                Common.device.slot.writeMessage("#VPU.PHATU:09");
+                Common.device.slot.writeMessage("#VPU.PHATU:0A");
                 break;
             case R.id.faza11:
-                fazet=11;
                 b=buttons.get(9);
                 b.setBackgroundColor(Color.BLUE);
-                Common.device.slot.writeMessage("#VPU.PHATU:0A");
+                Common.device.slot.writeMessage("#VPU.PHATU:0B");
                 break;
         }
     }

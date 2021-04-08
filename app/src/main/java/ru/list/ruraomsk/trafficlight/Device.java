@@ -17,7 +17,7 @@ public class Device extends Service {
     private String host;
     private int port;
     public Slot slot=null;
-    private boolean work=false;
+    public boolean work=false;
     private DeviceBinder binder=new DeviceBinder();
     private ReadData second=null;
     private Thread thread=null;
@@ -73,8 +73,11 @@ public class Device extends Service {
             @Override
             public void run() {
                 try {
-                    sleep(1000);
-                    //TODO
+                    while(work){
+                        sleep(10000);
+                        //TODO
+                        slot.writeMessage("#VPU.PHATU:0D");
+                    }
 
                 } catch (InterruptedException e) {
                     Log.d("litrDebug",e.getMessage());
@@ -86,10 +89,12 @@ public class Device extends Service {
     }
     public void disconnect(){
         if(slot==null) return;
-//        slot.writeMessage("exit");
+        slot.writeMessage("#VPU.PHATU:FF");
         try {
             sleep(1000);
-            second.interrupt();
+            slot.work=false;
+            sleep(1000);
+//            second.interrupt();
 //            thread.interrupt();
             while(slot.isWork()){
                 sleep(500);

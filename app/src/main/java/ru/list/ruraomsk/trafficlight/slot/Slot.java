@@ -19,7 +19,7 @@ public class Slot extends Thread implements Runnable{
     private String address;
     private int port;
     private Socket socket=null;
-    private boolean work;
+    public boolean work;
     private PrintWriter bufferOut=null;
     private BufferedReader bufferIn=null;
     private ConcurrentLinkedQueue<String> toWrite;
@@ -89,6 +89,7 @@ public class Slot extends Thread implements Runnable{
             });
             reader.start();
             String lastMessage="";
+            int alive=0;
             while(work){
                 int counter=0;
                 while(toWrite.isEmpty() || counter<5){
@@ -99,14 +100,17 @@ public class Slot extends Thread implements Runnable{
                     lastMessage=toWrite.poll();
 
                 } else {
-                    if (lastMessage.length()==0) {
+
+                    alive++;
+                    if (alive <2) {
                         continue;
                     }
+                    alive=0;
+                    lastMessage="#VPU.PHATU:0D";
                 }
-
                 sendMessage(lastMessage);
                 Log.d("litrDebug","Send:"+lastMessage);
-                if(lastMessage.startsWith("exit")) {
+                if(lastMessage.startsWith("#VPU.PHATU:FF")) {
                     sleep(1000);
                     break;
                 }

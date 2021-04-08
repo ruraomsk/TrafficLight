@@ -47,9 +47,10 @@ public class ReadData  extends Thread{
                     if(list.length ==1) last=" ";
                     else {
                         String[] l=list[1].split(",");
-                        if (l.length!=1) {
-                            //Есть второй параметр
+                        if (l.length==3) {
+                            //Есть второй и третий параметр
                             Common.values.put(list[0]+":2",l[1]);
+                            Common.values.put(list[0]+":3",l[2]);
                             list[1]=l[0];
                         }
                         last+=list[1];

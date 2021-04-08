@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 if (fab.getText().toString().equals("Начать работу")){
                     table.setVisibility(View.VISIBLE);
                     fab.setText("Закончить работу");
-                    Common.device.slot.writeMessage("#VPU.PHATU:0B");
+                    Common.device.slot.writeMessage("#VPU.PHATU:0D");
                 } else {
                     fab.setText("Начать работу");
                     table.setVisibility(View.INVISIBLE);
