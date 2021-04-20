@@ -17,6 +17,8 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
     private Button bOk;
     private EditText eHost;
     private EditText ePort;
+    private EditText eLogin;
+    private EditText ePassword;
     private Context ctx;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,11 +29,15 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
         bOk.setOnClickListener(this);
         eHost=findViewById(R.id.main_host);
         ePort=findViewById(R.id.main_port);
+        eLogin=findViewById(R.id.main_login);
+        ePassword=findViewById(R.id.main_password);
         SharedPreferences sPref=ctx.getSharedPreferences("litr",Context.MODE_PRIVATE);
 
         eHost.setText(sPref.getString("hostMain",ctx.getString(R.string.main_host)));
 
         ePort.setText(String.valueOf(sPref.getInt("portMain",Integer.parseInt(ctx.getString(R.string.main_port)))));
+        eLogin.setText(sPref.getString("hostLogin",ctx.getString(R.string.main_login)));
+        ePassword.setText(sPref.getString("hostPassword",ctx.getString(R.string.main_password)));
 
     }
 
@@ -44,6 +50,8 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
                 SharedPreferences.Editor editor=sPref.edit();
                 editor.putString("hostMain",eHost.getText().toString());
                 editor.putInt("portMain",Integer.getInteger(ePort.getText().toString()));
+                editor.putString("hostLogin",eLogin.getText().toString());
+                editor.putString("hostPassword",ePassword.getText().toString());
                 editor.commit();
                 Toast.makeText(this,"Сохранено",Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK,intent);

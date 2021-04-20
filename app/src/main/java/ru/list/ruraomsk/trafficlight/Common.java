@@ -17,6 +17,8 @@ import ru.list.ruraomsk.trafficlight.DB.UpdateDb;
 
 public class Common {
     static public String HostMain;
+    static public String HostLogin;
+    static public String HostPassword;
     static public int PortMain;
     static public DB db;
     static public UpdateDb updateDb;
@@ -43,23 +45,23 @@ public class Common {
         sPref=ctx.getSharedPreferences("litr",Context.MODE_PRIVATE);
 
         HostMain=sPref.getString("hostMain",ctx.getString(R.string.main_host));
+        HostLogin=sPref.getString("hostLogin",ctx.getString(R.string.main_login));
+        HostPassword=sPref.getString("hostPassword",ctx.getString(R.string.main_password));
         PortMain=sPref.getInt("portMain",Integer.parseInt(ctx.getString(R.string.main_port)));
         DefaultIpGPRS=sPref.getString("defaultIpGPRS","092.255.180.080");
         DefaultPortGPRS=sPref.getString("defaultPortGPRS","1096");
         DefaultIpLAN=sPref.getString("defaultIpLAN","192.168.115.013");
         DefaultPortLAN=sPref.getString("defaultPortLAN","1096");
-//        Log.d("litrDebug", "<"+ DefaultIpGPRS+">");
 
         db=new DB(ctx);
         db.open();
-//        db.clearAll();
         if (db.loadAll().isEmpty()){
             Log.d("litrDebug", "DataTable is empty" );
 
             Thread second=new Thread(new Runnable(){
                 @Override
                 public void run() {
-                    UpdateDb updateDb=new UpdateDb(db,HostMain,PortMain);
+                    UpdateDb updateDb=new UpdateDb(db,HostMain,PortMain,HostLogin,HostPassword);
                     hosts=db.getHosts();
                 }
             });
@@ -113,6 +115,8 @@ public class Common {
         editor.putString("defaultIpLAN",DefaultIpLAN);
         editor.putString("defaultIpLAN",DefaultIpLAN);
         editor.putString("hostMain",HostMain);
+        editor.putString("hostLogin",HostLogin);
+        editor.putString("hostPassword",HostPassword);
         editor.putInt("portMain",PortMain);
 
         editor.commit();

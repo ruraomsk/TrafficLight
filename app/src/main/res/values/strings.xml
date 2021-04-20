@@ -11,6 +11,8 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="main_host">192.168.115.159</string>
     <string name="main_port">8088</string>
+    <string name="main_login">LOGIN</string>
+    <string name="main_password">PASSWORD</string>
     <string name="choiceDevice">Принять выбор</string>
     <string name="not_device">Устройство не выбрано</string>
 

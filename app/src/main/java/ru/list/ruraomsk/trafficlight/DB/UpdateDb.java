@@ -30,7 +30,7 @@ public class UpdateDb {
         return bufferIn.readLine();
     }
 
-    public UpdateDb(DB db,String host,int port){
+    public UpdateDb(DB db,String host,int port,String login,String password){
         try {
             socket=new Socket();
             socket.connect(new InetSocketAddress(InetAddress.getByName(host),port),1000);
@@ -38,11 +38,16 @@ public class UpdateDb {
             socket.setSoTimeout(1000);
             bufferIn=new BufferedReader((new InputStreamReader(socket.getInputStream())));
             bufferOut=new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()),64*1024));
+            bufferOut.println(login+":"+password);
+            bufferOut.flush();
             db.clearAll();
+            bufferOut.println(login+":"+password);
+            bufferOut.flush();
             while(true){
                 String message=readMessage();
                 if (message==null) break;
                 if (message.startsWith("end")) break;
+                if (message.startsWith("BAD")) break;
                 db.appendString(message);
             }
         } catch (IOException | InterruptedException ex) {
