@@ -57,20 +57,15 @@ public class MainActivity extends AppCompatActivity {
                     table.setVisibility(View.INVISIBLE);
                     Common.device.slot.writeMessage("#VPU.PHATU:00");
                 }
-//
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
             }
         });
         Common.run(this);
         Common.intent=new Intent(this, Device.class);
         ComponentName name=startService(new Intent(this, Device.class));
-//        if(name!=null) Log.d("litrDebug", name.getPackageName()+""+name.getClassName() );
 
         Common.sconn=new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-//                Log.d("litrDebug", "onServerConnected" );
                 Common.device=((Device.DeviceBinder) service).getService();
                 Common.bound=true;
 
@@ -92,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -148,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                                     });
                                 }
                             } catch (InterruptedException e) {
-//                                Log.d("litrDebug", e.getMessage());
+                                return;
                             }
 
                         }
@@ -192,14 +186,11 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
-//        Log.d("litrDebug", "requestCode = " + requestCode + ", resultCode = " + resultCode);
 
         if(resultCode==RESULT_OK){
             switch (requestCode){
                 case REQUEST_CODE_DEVICES:
                     Common.host=data.getStringExtra("host");
-//                    Log.d("litrDebug", "host = " + Common.host);
-
                     tvDeviceName.setText(Common.db.getName(Common.host));
                     break;
                 case REQUEST_CODE_SETTING:
@@ -214,14 +205,14 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//    }
+//
+//    @Override
+//    protected void onStop() {
+//        super.onStop();
+//    }
 
 }

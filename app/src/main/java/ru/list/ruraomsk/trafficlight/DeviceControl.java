@@ -21,8 +21,6 @@ public class DeviceControl extends ViewController implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-//        Common.values.put("#VPU.PHATS:2","0F");
         View v= inflater.inflate(R.layout.fragment_device_control, container, false);
         buttons.add(v.findViewById(R.id.faza1));
         buttons.add(v.findViewById(R.id.faza2));
@@ -53,7 +51,7 @@ public class DeviceControl extends ViewController implements View.OnClickListene
         int i=1;
         String s=Common.values.get("#VPU.PHATS:2");
         if (s==null){
-            s="0F";
+            s="FF";
         }
         int mask=Integer.valueOf(s,16);
         for (Button b:buttons ) {
@@ -106,7 +104,6 @@ public class DeviceControl extends ViewController implements View.OnClickListene
         }
         int fazez=Integer.valueOf(s,16);
 
-//        Log.d("litrDebug","FAZAZ="+s);
         if (fazez>0){
             if (fazez<9 ){
                 Button b=buttons.get(fazez-1);

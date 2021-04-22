@@ -35,6 +35,7 @@ public class ReadData  extends Thread{
                 }
 //                Log.d("litrDebug","<"+message+">");
                 String[] list=message.split(":");
+//
                 String last="";
                 if (list.length ==4){
                     //Тут еще и время есть

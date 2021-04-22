@@ -30,12 +30,12 @@ public class Device extends Service {
 
     }
 
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-//        Log.d("litrDebug", "OnStartCommand Device" );
-
-        return super.onStartCommand(intent, flags, startId);
-    }
+//    @Override
+//    public int onStartCommand(Intent intent, int flags, int startId) {
+////        Log.d("litrDebug", "OnStartCommand Device" );
+//
+//        return super.onStartCommand(intent, flags, startId);
+//    }
 
     public void connect(){
         if(slot!=null) return;
