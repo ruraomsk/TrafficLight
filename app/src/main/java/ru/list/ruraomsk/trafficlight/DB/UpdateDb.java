@@ -2,6 +2,7 @@ package ru.list.ruraomsk.trafficlight.DB;
 
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,6 +13,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import android.widget.Toast;
 
 public class UpdateDb {
     private DB db;
@@ -38,11 +40,9 @@ public class UpdateDb {
             socket.setSoTimeout(1000);
             bufferIn=new BufferedReader((new InputStreamReader(socket.getInputStream())));
             bufferOut=new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()),64*1024));
-            bufferOut.println(login+":"+password);
+            bufferOut.println(login+":"+password+":getList");
             bufferOut.flush();
             db.clearAll();
-            bufferOut.println(login+":"+password);
-            bufferOut.flush();
             while(true){
                 String message=readMessage();
                 if (message==null) break;
@@ -53,6 +53,7 @@ public class UpdateDb {
         } catch (IOException | InterruptedException ex) {
             Log.d("litrDebug",ex.getMessage());
         }
+        Toast.makeText(null, "База данных обновлена", Toast.LENGTH_LONG).show();
         close();
     }
     private void close(){

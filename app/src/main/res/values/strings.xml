@@ -19,7 +19,5 @@
     <string name="setting_save">Сохранить</string>
     <string name="setting_server">Сервер обновлений</string>
     <string name="edid_send">Отправить</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

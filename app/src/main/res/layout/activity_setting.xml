@@ -30,14 +30,16 @@
                 android:text="@string/main_host"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:importantForAutofill="no"
-                android:inputType="number">
+                android:nextFocusDown="@+id/main_port"
+                android:importantForAutofill="no">
             </EditText>
             <EditText
                 android:id="@+id/main_port"
                 android:text="@string/main_port"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:nextFocusDown="@+id/main_login"
+                android:inputType="number">
             </EditText>
         </LinearLayout>
         <LinearLayout
@@ -52,16 +54,16 @@
             <EditText
                 android:id="@+id/main_login"
                 android:text="LOGIN"
+                android:nextFocusDown="@+id/main_password"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:importantForAutofill="no"
-                android:inputType="number">
+                android:layout_height="wrap_content">
             </EditText>
             <EditText
                 android:id="@+id/main_password"
                 android:text="PASSWORD"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:inputType="textPassword">
             </EditText>
         </LinearLayout>
     </LinearLayout>
