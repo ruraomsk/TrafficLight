@@ -1,6 +1,5 @@
 package ru.list.ruraomsk.trafficlight.DB;
 
-import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,10 +12,8 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import android.widget.Toast;
 
 public class UpdateDb {
-    private DB db;
     private Socket socket;
 
     private PrintWriter bufferOut=null;

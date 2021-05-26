@@ -115,11 +115,11 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Сервис не запущен", Toast.LENGTH_LONG).show();
                     break;
                 }
-                if(Common.host==null){
+                if(Common.pos==null){
                     Toast.makeText(this, "Выберите устройство", Toast.LENGTH_LONG).show();
                     break;
                 }
-                Common.device.setDevice(Common.host,Common.db.getPort(Common.host),Common.db.getLogin(Common.host),Common.db.getPassword(Common.host));
+                Common.device.setDevice(Common.pos,Common.db.getPort(Common.pos),Common.db.getLogin(Common.pos),Common.db.getPassword(Common.pos));
                 Common.device.connect();
                 if(Common.device.isWork())  {
                     Toast.makeText(this, "Устанавлено соединение", Toast.LENGTH_LONG).show();
@@ -190,8 +190,8 @@ public class MainActivity extends AppCompatActivity {
         if(resultCode==RESULT_OK){
             switch (requestCode){
                 case REQUEST_CODE_DEVICES:
-                    Common.host=data.getStringExtra("host");
-                    tvDeviceName.setText(Common.db.getName(Common.host));
+                    Common.pos=data.getStringExtra("pos");
+                    tvDeviceName.setText(Common.db.getName(Common.pos));
                     break;
                 case REQUEST_CODE_SETTING:
                     Common.run(ctx);
@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }else {
             Toast.makeText(this, "Отмена", Toast.LENGTH_SHORT).show();
-            Common.host=null;
+            Common.pos=null;
             tvDeviceName.setText("Устройство не выбрано");
         }
         super.onActivityResult(requestCode, resultCode, data);

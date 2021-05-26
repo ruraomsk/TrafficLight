@@ -11,10 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
 
 public class Setting extends AppCompatActivity implements View.OnClickListener {
-    private Button bOk;
     private EditText eHost;
     private EditText ePort;
     private EditText eLogin;
@@ -25,7 +23,7 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         ctx=this;
-        bOk=findViewById(R.id.btnOk);
+        Button bOk = findViewById(R.id.btnOk);
         bOk.setOnClickListener(this);
         eHost=findViewById(R.id.main_host);
         ePort=findViewById(R.id.main_port);
@@ -43,20 +41,18 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.btnOk:
-                Intent intent=new Intent();
-                SharedPreferences sPref=ctx.getSharedPreferences("litr", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor=sPref.edit();
-                editor.putString("hostMain",eHost.getText().toString());
-                editor.putInt("portMain",Integer.getInteger(ePort.getText().toString()));
-                editor.putString("hostLogin",eLogin.getText().toString());
-                editor.putString("hostPassword",ePassword.getText().toString());
-                editor.commit();
-                Toast.makeText(this,"Сохранено",Toast.LENGTH_SHORT).show();
-                setResult(RESULT_OK,intent);
-                finish();
-                break;
+        if (v.getId() == R.id.btnOk) {
+            Intent intent = new Intent();
+            SharedPreferences sPref = ctx.getSharedPreferences("litr", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sPref.edit();
+            editor.putString("hostMain", eHost.getText().toString());
+            editor.putInt("portMain", Integer.getInteger(ePort.getText().toString()));
+            editor.putString("hostLogin", eLogin.getText().toString());
+            editor.putString("hostPassword", ePassword.getText().toString());
+            editor.apply();
+            Toast.makeText(this, "Сохранено", Toast.LENGTH_SHORT).show();
+            setResult(RESULT_OK, intent);
+            finish();
         }
     }
 }

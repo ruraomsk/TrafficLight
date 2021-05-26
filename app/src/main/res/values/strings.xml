@@ -9,10 +9,10 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="main_host">092.255.180.080</string>
-    <string name="main_port">8088</string>
-    <string name="main_login">LOGIN</string>
-    <string name="main_password">PASSWORD</string>
+    <string name="main_host">195.168.115.115</string>
+    <string name="main_port">8090</string>
+    <string name="main_login">rura</string>
+    <string name="main_password">162747</string>
     <string name="choiceDevice">Принять выбор</string>
     <string name="not_device">Устройство не выбрано</string>
 

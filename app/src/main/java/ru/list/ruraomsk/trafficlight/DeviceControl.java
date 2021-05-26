@@ -3,9 +3,6 @@ package ru.list.ruraomsk.trafficlight;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,13 +128,13 @@ public class DeviceControl extends ViewController implements View.OnClickListene
 
     @Override
     public void onStart() {
-        Common.RegitrationFragment("control",this);
+        Common.RegistrationFragment("control",this);
         super.onStart();
     }
 
     @Override
     public void onStop() {
-        Common.UnRegitrationFragment("control");
+        Common.UnRegistrationFragment("control");
         super.onStop();
     }
 

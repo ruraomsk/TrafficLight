@@ -11,10 +11,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import java.util.Set;
-
-import ru.list.ruraomsk.trafficlight.DB.DB;
-import ru.list.ruraomsk.trafficlight.DB.UpdateDb;
+//import java.util.Set;
+//
+//import ru.list.ruraomsk.trafficlight.DB.DB;
+//import ru.list.ruraomsk.trafficlight.DB.UpdateDb;
 
 public class ChoiceDevice extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,15 +31,15 @@ public class ChoiceDevice extends AppCompatActivity implements View.OnClickListe
         bOk.setOnClickListener(this);
         Common.run(this);
         Log.d("litrDebug", Common.HostMain );
-        String[] names=new String[Common.hosts.size()];
-        aHosts=new String[Common.hosts.size()];
+        String[] names=new String[Common.poses.size()];
+        aHosts=new String[Common.poses.size()];
         int i=0;
-        for (String host:Common.hosts) {
+        for (String host:Common.poses) {
             aHosts[i]=host;
             names[i++]=Common.db.getName(host);
         }
         listView=findViewById(R.id.ldevices);
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,android.R.layout.simple_list_item_single_choice,names);
+        ArrayAdapter<String> adapter= new ArrayAdapter<>(this, android.R.layout.simple_list_item_single_choice, names);
         listView.setAdapter(adapter);
         ListViewAutoScrollHelper scrollHelper=new ListViewAutoScrollHelper(listView);
         scrollHelper.setEnabled(true);
@@ -49,12 +49,10 @@ public class ChoiceDevice extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         Intent intent=new Intent();
-        switch (v.getId()){
-            case R.id.btnAccept:
-            intent.putExtra("host",aHosts[listView.getCheckedItemPosition()]);
-            setResult(RESULT_OK,intent);
+        if (v.getId() == R.id.btnAccept) {
+            intent.putExtra("host", aHosts[listView.getCheckedItemPosition()]);
+            setResult(RESULT_OK, intent);
             finish();
-            break;
         }
     }
 
