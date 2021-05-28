@@ -1,7 +1,10 @@
 package ru.list.ruraomsk.trafficlight.DB;
 
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,12 +16,14 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 
+import ru.list.ruraomsk.trafficlight.Common;
+
 public class UpdateDb {
     private Socket socket;
 
     private PrintWriter bufferOut=null;
     private BufferedReader bufferIn=null;
-
+    public boolean status;
     private String readMessage() throws IOException, InterruptedException {
         if(!socket.isConnected()) return null;
         int count=0;
@@ -26,10 +31,14 @@ public class UpdateDb {
             Thread.sleep(100);
             if (++count >20) return null;
         }
-        return bufferIn.readLine();
+        String message=bufferIn.readLine();
+        if (message==null) return null;
+        message= Common.Decode(message);
+        return message;
     }
 
-    public UpdateDb(DB db,String host,int port,String login,String password){
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public UpdateDb(DB db, String host, int port, String login, String password){
         try {
             socket=new Socket();
             socket.connect(new InetSocketAddress(InetAddress.getByName(host),port),1000);
@@ -37,7 +46,8 @@ public class UpdateDb {
             socket.setSoTimeout(1000);
             bufferIn=new BufferedReader((new InputStreamReader(socket.getInputStream())));
             bufferOut=new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()),64*1024));
-            bufferOut.println(login+":"+password+":getList");
+            bufferOut.print(Common.Encode(login+":"+password+":getList"));
+            bufferOut.print("\n");
             bufferOut.flush();
             db.clearAll();
             while(true){
@@ -47,10 +57,11 @@ public class UpdateDb {
                 if (message.startsWith("BAD")) break;
                 db.appendString(message);
             }
+            status=true;
         } catch (IOException | InterruptedException ex) {
             Log.d("litrDebug",ex.getMessage());
+            status=false;
         }
-        Toast.makeText(null, "База данных обновлена", Toast.LENGTH_LONG).show();
         close();
     }
     private void close(){

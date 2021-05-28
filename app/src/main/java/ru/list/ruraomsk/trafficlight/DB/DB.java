@@ -125,7 +125,7 @@ public class DB {
     }
     private class DBHelper extends SQLiteOpenHelper {
         public DBHelper(Context context){
-            super(context,"dbAir",null,1);
+            super(context,"dbAir",null,2);
         }
         @Override
         public void onCreate(SQLiteDatabase db) {
@@ -190,7 +190,8 @@ class DevDef{
             id=jsonObject.getInt("id");
             pos=String.valueOf(area)+":"+String.valueOf(id);
             port=jsonObject.getInt("port");
-            host=jsonObject.getString("name");
+            host=jsonObject.getString("host");
+            name=jsonObject.getString("name");
             login= jsonObject.getString("login");
             password=jsonObject.getString("password");
             ssid=jsonObject.getString("ssid");

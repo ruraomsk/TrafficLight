@@ -5,11 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -26,6 +28,7 @@ import android.widget.Toast;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Base64;
 
 public class MainActivity extends AppCompatActivity {
     final int REQUEST_CODE_DEVICES=1;
@@ -37,9 +40,17 @@ public class MainActivity extends AppCompatActivity {
     Context ctx;
     Button fab;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        String test="testTest";
+//        String encode = Common.Encode(test);
+//
+//        String res=Common.Decode(encode);
+//        if(test.compareTo(res)!=0){
+//            return;
+//        }
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

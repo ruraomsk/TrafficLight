@@ -50,7 +50,7 @@ public class ChoiceDevice extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent=new Intent();
         if (v.getId() == R.id.btnAccept) {
-            intent.putExtra("host", aHosts[listView.getCheckedItemPosition()]);
+            intent.putExtra("pos", aHosts[listView.getCheckedItemPosition()]);
             setResult(RESULT_OK, intent);
             finish();
         }
