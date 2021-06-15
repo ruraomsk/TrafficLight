@@ -46,11 +46,11 @@ public class Setting extends AppCompatActivity implements View.OnClickListener {
             SharedPreferences sPref = ctx.getSharedPreferences("litr", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sPref.edit();
             editor.putString("hostMain", eHost.getText().toString());
-            editor.putInt("portMain", Integer.getInteger(ePort.getText().toString()));
+            editor.putInt("portMain", Integer.parseInt(ePort.getText().toString()));
             editor.putString("hostLogin", eLogin.getText().toString());
             editor.putString("hostPassword", ePassword.getText().toString());
             editor.apply();
-            Toast.makeText(this, "Сохранено", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Сохранено", Toast.LENGTH_SHORT).show();
             setResult(RESULT_OK, intent);
             finish();
         }

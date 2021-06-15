@@ -57,6 +57,9 @@ public class UpdateDb {
                 if (message.startsWith("BAD")) break;
                 db.appendString(message);
             }
+            bufferOut.print(Common.Encode(login+":"+password+":logout"));
+            bufferOut.print("\n");
+            bufferOut.flush();
             status=true;
         } catch (IOException | InterruptedException ex) {
             Log.d("litrDebug",ex.getMessage());

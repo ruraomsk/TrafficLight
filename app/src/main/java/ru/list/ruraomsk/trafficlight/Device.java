@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.Toast;
 
 import ru.list.ruraomsk.trafficlight.slot.ReadData;
 import ru.list.ruraomsk.trafficlight.slot.Slot;
@@ -32,7 +33,11 @@ public class Device extends Service {
 
 
     public void connect(){
-        if(slot!=null) return;
+        if(slot!=null) {
+            Toast.makeText(this, "Закройте текущее соединение", Toast.LENGTH_LONG).show();
+
+            return;
+        }
         Log.d("litrDebug", this.host );
         try {
             slot=new Slot(host,port);
@@ -55,8 +60,7 @@ public class Device extends Service {
                 try {
                     while(work){
                         sleep(10000);
-                        //TODO
-                        slot.writeMessage("#VPU.PHATU:0D");
+                        if (work) slot.writeMessage("#VPU.PHATU:0D");
                     }
 
                 } catch (InterruptedException e) {
@@ -78,9 +82,14 @@ public class Device extends Service {
                 sleep(500);
             }
             work=false;
+            slot.interrupt();
             slot=null;
-            thread=null;
-            second=null;
+//            thread.interrupt();
+//            thread=null;
+//            second.interrupt();
+//            second=null;
+//            thread=null;
+//            second=null;
         } catch (InterruptedException e) {
             Log.d("litr",e.getMessage());
         }

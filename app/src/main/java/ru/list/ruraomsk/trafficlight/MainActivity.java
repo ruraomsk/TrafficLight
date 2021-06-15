@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(this, "Выберите устройство", Toast.LENGTH_LONG).show();
                     break;
                 }
-                Common.device.setDevice(Common.pos,Common.db.getPort(Common.pos),Common.db.getLogin(Common.pos),Common.db.getPassword(Common.pos));
+                Common.device.setDevice(Common.db.getHost(Common.pos),Common.db.getPort(Common.pos),Common.db.getLogin(Common.pos),Common.db.getPassword(Common.pos));
                 Common.device.connect();
                 if(Common.device.isWork())  {
                     Toast.makeText(this, "Устанавлено соединение", Toast.LENGTH_LONG).show();
@@ -205,7 +205,9 @@ public class MainActivity extends AppCompatActivity {
                     tvDeviceName.setText(Common.db.getName(Common.pos));
                     break;
                 case REQUEST_CODE_SETTING:
-                    Common.run(ctx);
+                    Toast.makeText(this, "Необходимо перезапустить программу", Toast.LENGTH_LONG).show();
+                    finish();
+                    //                    System.exit(0);
                     break;
             }
         }else {
